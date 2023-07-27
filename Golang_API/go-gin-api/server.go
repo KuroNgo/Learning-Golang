@@ -37,7 +37,20 @@ func main() {
 	server.Static("/css", "/template/css")
 
 	server.LoadHTMLGlob("templates/html/*.html")
-	apiRoutes := server.Group("/api")
+
+	//TODO: Login Endpoint: Authentication + Token creation
+	server.POST("/login", func(ctx *gin.Context) {
+		token := loginController.Login(ctx)
+		if token != "" {
+			ctx.JSON(http.StatusOK, gin.H{
+				"token": token,
+			})
+		} else {
+			ctx.JSON(http.StatusUnauthorized, nil)
+		}
+	})
+
+	apiRoutes := server.Group("/api", middleware.AuthorizeJWT())
 	{
 		// để ghi log các yêu cầu HTTP và các thông tin liên quan
 		// server.Use(gin.Logger())
