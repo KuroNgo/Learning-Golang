@@ -6,13 +6,15 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	gindump "github.com/tpkeeper/gin-dump"
 	"kuro.com/pragnaticreviews/golang-gin-poc/controller"
 	"kuro.com/pragnaticreviews/golang-gin-poc/middleware"
 	"kuro.com/pragnaticreviews/golang-gin-poc/service"
 )
 
 var (
+	jwtService      service.JWTService         = service.NewJWTService()
+	loginService    service.LoginService       = service.NewLoginService()
+	loginController controller.LoginController = controller.NewLoginController(loginService, jwtService)
 	videoService    service.VideoService       = service.New()
 	videoController controller.VideoController = controller.New(videoService)
 )
@@ -35,7 +37,7 @@ func main() {
 	// tạo mới một instance của framework Gin
 	server := gin.New()
 	server.Static("/css", "/template/css")
-
+	server.Use(gin.Recovery(), gin.Logger())
 	server.LoadHTMLGlob("templates/html/*.html")
 
 	//TODO: Login Endpoint: Authentication + Token creation
@@ -70,11 +72,16 @@ func main() {
 	}
 	// tự động xxuwr lý các panic lỗi runtime trong ứng dụng và
 	// trả về một HTTP 500 Internal Server Error
-	server.Use(gin.Recovery(), middleware.Logger(),
-		middleware.Auth(), gindump.Dump())
+	//server.Use(gin.Recovery(), middleware.Logger(),
+	//	middleware.Auth(), gindump.Dump())
 	viewRoutes := server.Group("/view")
 	{
 		viewRoutes.GET("/videos", videoController.ShowAll)
 	}
-	server.Run(":8080")
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5000"
+	}
+	server.Run(":" + port)
 }

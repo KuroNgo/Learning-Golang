@@ -11,8 +11,8 @@ type LoginController interface {
 }
 
 type loginController struct {
-	loginService service.LoginServcie
-	JWTService   service.JWTService
+	loginService service.LoginService
+	jWtService   service.JWTService
 }
 
 func NewLoginController(loginService service.LoginService,
