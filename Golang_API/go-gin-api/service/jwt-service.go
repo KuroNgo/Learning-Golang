@@ -2,9 +2,10 @@ package service
 
 import (
 	"fmt"
-	jwt "github.com/dgrijalva/jwt-go"
 	"os"
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 type JWTService interface {
@@ -51,7 +52,7 @@ func (jwtSrv *jwtService) GenerateToken(username string, admin bool) string {
 	}
 
 	// create token with claims
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
 
 	// Generate encode token using the secret signing key
 	t, err := token.SignedString([]byte(jwtSrv.secretKey))

@@ -1,12 +1,12 @@
 package controller
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"kuro.com/pragnaticreviews/golang-gin-poc/entity"
 	"kuro.com/pragnaticreviews/golang-gin-poc/service"
-	"kuro.com/pragnaticreviews/golang-gin-poc/validators"
-	"net/http"
 )
 
 type VideoController interface {
@@ -24,8 +24,6 @@ var validate *validator.Validate
 
 func New(service service.VideoService) VideoController {
 	validate = validator.New()
-	validate.RegisterValidation("is-cool", validators.ValidateCoolTitle)
-
 	return &controller{
 		service: service,
 	}

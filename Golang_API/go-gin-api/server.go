@@ -36,8 +36,8 @@ func main() {
 	// TODO: middleware
 	// tạo mới một instance của framework Gin
 	server := gin.New()
-	server.Static("/css", "/template/css")
 	server.Use(gin.Recovery(), gin.Logger())
+	server.Static("/css", "/template/css")
 	server.LoadHTMLGlob("templates/html/*.html")
 
 	//TODO: Login Endpoint: Authentication + Token creation
@@ -48,7 +48,9 @@ func main() {
 				"token": token,
 			})
 		} else {
-			ctx.JSON(http.StatusUnauthorized, nil)
+			ctx.JSON(http.StatusUnauthorized, gin.H{
+				"token": token,
+			})
 		}
 	})
 
