@@ -1,3 +1,3 @@
-package Ultil
+package ultil
 
 const ADMIN_ROLE = "admin"

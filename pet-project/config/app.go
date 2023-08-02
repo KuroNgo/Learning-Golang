@@ -1,4 +1,4 @@
-package Conf
+package config
 
 import (
 	"github.com/gin-gonic/gin"
@@ -14,6 +14,6 @@ func NewApp() *App {
 	}
 }
 
-func (a *App) Run() err {
+func (a *App) Run() error {
 	return a.Router.Run(":" + cfg.Port)
 }

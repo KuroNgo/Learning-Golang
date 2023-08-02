@@ -1,4 +1,4 @@
-package Conf
+package config
 
 import (
 	"fmt"
@@ -14,9 +14,9 @@ type Config struct {
 	DBName     string `env:"DB_NAME" envDefault:"DB_NAME"`
 	Port       string `env:"PORT" envDefault:"PORT"`
 
-	MaxOpenConns    int `env:"MAX_OPEN_CONNS" envDefault:"MAX_OPEN_CONNS"`
-	MaxIdleConns    int `env:"MAX_IDLE_CONNS" envDefault:"MAX_IDLE_CONNS"`
-	ConnMaxLifetime int `env:"CONN_MAX_LIFETIME" envDefault:"CONN_MAX_LIFETIME"`
+	MaxOpenConns    int `env:"MAX_OPEN_CONNS" envDefault:"25"`
+	MaxIdleConns    int `env:"MAX_IDLE_CONNS" envDefault:"25"`
+	ConnMaxLifetime int `env:"CONN_MAX_LIFETIME" envDefault:"600"`
 }
 
 var cfg Config
@@ -26,4 +26,8 @@ func SetEnv() {
 		fmt.Printf("Failed to parse env %v", err)
 		return
 	}
+}
+
+func GetEnv() Config {
+	return cfg
 }

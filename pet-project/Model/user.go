@@ -1,15 +1,19 @@
-package Model
+package model
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type User struct {
-	Id       int64     `json:"id"`
-	Username string    `json:"username"`
-	Password string    `json:"password"`
-	Hoten    string    `json:"name"`
-	NgaySinh time.Time `json:"ngaysinh"`
-	Email    string    `json:"email"`
-	SDT      string    `json:"sdt"`
+	gorm.Model           // Tạo ID tự tăng "identity"
+	Username   string    `json:"username"`
+	Password   string    `json:"password"`
+	Hoten      string    `json:"name"`
+	NgaySinh   time.Time `json:"ngaysinh"`
+	Email      string    `json:"email"`
+	SDT        string    `json:"sdt"`
 }
 
 type UserRequest struct {
