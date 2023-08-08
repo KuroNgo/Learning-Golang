@@ -1,6 +1,8 @@
 package repo
 
-import "pet-project/model"
+import (
+	"pet-project/model"
+)
 
 func (repo *Repo) GetUserByEmail(email string) (model.User, error) {
 	// Tìm kiếm bản ghi trong bảng "users" từ request

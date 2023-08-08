@@ -7,16 +7,22 @@ import (
 )
 
 type User struct {
-	gorm.Model           // Tạo ID tự tăng "identity"
-	Username   string    `json:"username"`
-	Password   string    `json:"password"`
-	Hoten      string    `json:"name"`
-	NgaySinh   time.Time `json:"ngaysinh"`
-	Email      string    `json:"email"`
-	SDT        string    `json:"sdt"`
+	gorm.Model // Tạo ID tự tăng "identity"
+
+	Username  string    `json:"username" gorm:"unique"`
+	Password  string    `json:"password"`
+	Hoten     string    `json:"name"`
+	Address   string    `json:"address"`
+	NgaySinh  time.Time `json:"ngaysinh"`
+	Email     string    `json:"email" gorm:"unique"`
+	Role      string    `json:"role,omitempty"`
+	SDT       string    `json:"sdt"`
+	Create_id int       `json:"create_id"`
+	Update_id int       `json:"update_id"`
+	DelatedAt time.Time `json:"delated_at" gorm:"datetime"`
 }
 
 type UserRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }

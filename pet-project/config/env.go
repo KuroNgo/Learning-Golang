@@ -7,12 +7,12 @@ import (
 )
 
 type Config struct {
-	DBHost     string `env:"DB_HOST" envDefault:"DB_HOST"`
+	DBHost     string `env:"DB_HOST" envDefault:"localhost"`
 	DBPort     string `env:"DB_PORT" envDefault:"DB_PORT"`
 	DBUser     string `env:"DB_USER" envDefault:"DB_USER"`
 	DBPassword string `env:"DB_PASSWORD" envDefault:"DB_PASSWORD"`
 	DBName     string `env:"DB_NAME" envDefault:"DB_NAME"`
-	Port       string `env:"PORT" envDefault:"PORT"`
+	Port       string `env:"PORT" envDefault:"5432"`
 
 	MaxOpenConns    int `env:"MAX_OPEN_CONNS" envDefault:"25"`
 	MaxIdleConns    int `env:"MAX_IDLE_CONNS" envDefault:"25"`

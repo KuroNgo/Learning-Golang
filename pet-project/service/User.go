@@ -12,6 +12,10 @@ type User struct {
 	repo repo.IRepo
 }
 
+type IUser interface {
+	Login(ctx context.Context, userRequest model.UserRequest) (userResponse model.User, err error)
+}
+
 func NewUser(repo repo.IRepo) *User {
 	return &User{
 		repo: repo,
