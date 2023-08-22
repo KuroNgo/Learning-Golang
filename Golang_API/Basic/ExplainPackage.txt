@@ -1,0 +1,134 @@
+1. Thư viện fmt
+Thư viện fmt là một trong những thư viện tiêu chuẩn của ngôn ngữ lập trình Golang (Go).
+Tên viết tắt "fmt" xuất phát từ "format" (định dạng), và nó cung cấp các chức năng để định dạng và in ra thông tin trong chương trình của bạn.
+fmt hỗ trợ các chức năng sau:
+Định dạng và in ra các chuỗi (strings):
+Bạn có thể sử dụng hàm Print, Printf, Println để in ra các giá trị dưới dạng chuỗi. 
+Hàm Printf cho phép bạn định dạng chuỗi sử dụng các định dạng tương tự như trong ngôn ngữ C.
+
+Định dạng và in ra các giá trị số: Bạn có thể sử dụng hàm Print, Printf, Println để in ra các giá trị số (số nguyên, số thực) dưới dạng chuỗi.
+Định dạng và in ra các giá trị boolean: Bạn có thể sử dụng hàm Print, Printf, Println để in ra giá trị boolean dưới dạng chuỗi ("true" hoặc "false").
+Định dạng và in ra các giá trị của các kiểu dữ liệu phức tạp: Bạn có thể sử dụng hàm Printf để định 
+dạng và in ra các giá trị của các kiểu dữ liệu phức tạp như cấu trúc (struct) hoặc slice.
+
+Đọc đầu vào từ người dùng: fmt cung cấp hàm Scan, Scanf, Scanln để đọc dữ liệu đầu vào từ người dùng.
+Định dạng và in ra các giá trị trong các buffer: Bạn có thể sử dụng fmt để định dạng và in ra các giá trị vào các buffer (vùng đệm)
+bằng cách sử dụng Fprintf, Sprintf, Errorf.
+Thư viện fmt rất hữu ích trong việc thao tác với các chuỗi và hiển thị thông tin trong các chương trình Go. 
+Nó là một trong những thư viện tiêu chuẩn quan trọng và được sử dụng phổ biến trong hầu hết các ứng dụng Go.
+
+2. Thư viện log
+Thư viện log cũng là một trong những thư viện tiêu chuẩn của ngôn ngữ lập trình Golang (Go). 
+Nó cung cấp các chức năng đơn giản để ghi thông tin (logs) vào đầu ra (thường là STDERR) của chương trình.
+Thư viện log hỗ trợ hai loại log chính:
+Log thông tin (Info logs): Để ghi lại các thông tin về hoạt động của chương trình, như thông tin về quá trình xử lý, trạng thái, 
+hay bất kỳ thông tin gì có ý nghĩa về hành vi của chương trình trong quá trình thực thi.
+Log lỗi (Error logs): 
+Để ghi lại các thông báo lỗi hoặc thông báo khi xảy ra những vấn đề không mong muốn trong quá trình thực thi của chương trình.
+Cách sử dụng thư viện log khá đơn giản. 
+Bạn có thể sử dụng các hàm như Print, Printf, Println để ghi thông tin và lỗi vào đầu ra. Ví dụ:
+
+go
+Copy code
+package main
+
+import (
+	"log"
+)
+
+func main() {
+	log.Print("This is an information log.")
+	log.Printf("This is an information log with a formatted message: %s", "Hello, Golang!")
+	log.Println("This is an information log with a new line.")
+
+	// Ghi thông báo lỗi
+	log.Print("This is an error log.")
+	log.Fatalf("This is a fatal error log: %s", "Something went terribly wrong.")
+}
+
+Trong mã trên, các thông tin log thông thường sẽ được hiển thị trên STDOUT hoặc STDERR của chương trình, tùy thuộc vào cấu hình mặc định. 
+Trong khi đó, log lỗi sử dụng Fatalf sẽ gây ra kết thúc chương trình ngay lập tức sau khi log được ghi lại.
+
+Lưu ý rằng việc ghi log thông tin và log lỗi là rất hữu ích để giúp bạn 
+theo dõi quá trình thực thi và tìm hiểu những vấn đề trong chương trình của bạn.
+
+3. Thư viện Error
+Thư viện errors là một trong những thư viện tiêu chuẩn của ngôn ngữ lập trình Golang (Go). 
+Nó cung cấp các công cụ để tạo và xử lý các lỗi trong chương trình.
+
+Trong Golang, lỗi được đại diện bởi kiểu error, đây là một kiểu giao diện (interface) đơn giản chỉ có một phương thức là Error() trả về một chuỗi. 
+Thư viện errors cung cấp các hàm để tạo và xử lý giá trị kiểu error.
+
+Các hàm chính trong thư viện errors bao gồm:
+
+errors.New: Hàm này được sử dụng để tạo một giá trị kiểu error mới từ một chuỗi thông báo.
+go
+Copy code
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func divide(x, y float64) (float64, error) {
+	if y == 0 {
+		return 0, errors.New("division by zero")
+	}
+	return x / y, nil
+}
+
+func main() {
+	result, err := divide(10, 0)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("Result:", result)
+	}
+}
+fmt.Errorf: Hàm này tạo một giá trị kiểu error mới từ một chuỗi định dạng. 
+Nó tương tự như fmt.Printf và cho phép bạn sử dụng các đặc tả để định dạng thông báo lỗi.
+
+go
+Copy code
+package main
+
+import (
+	"fmt"
+)
+
+func divide(x, y float64) (float64, error) {
+	if y == 0 {
+		return 0, fmt.Errorf("division by zero: %f / %f", x, y)
+	}
+	return x / y, nil
+}
+
+func main() {
+	result, err := divide(10, 0)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("Result:", result)
+	}
+}
+
+Như trong ví dụ trên, nếu bạn gọi hàm divide(10, 0), nó sẽ trả về một giá trị kiểu error và thông báo lỗi sẽ được in ra màn hình.
+Thư viện errors đơn giản nhưng hữu ích trong việc tạo và xử lý các lỗi trong chương trình Golang. 
+Khi xây dựng các ứng dụng Go, sử dụng cơ chế xử lý lỗi đúng đắn sẽ giúp bạn dễ dàng phát hiện và giải quyết vấn đề khi chương trình gặp lỗi.
+
+4. Thư viện Random
+
+Trong ngôn ngữ lập trình Golang (Go), không có một thư viện duy nhất gọi là "random" như bạn đã đề cập. 
+Thay vào đó, các tính năng liên quan đến số ngẫu nhiên và bộ sinh số ngẫu nhiên (random number generator) 
+được cung cấp bởi gói math/rand và gói math.
+
+Gói math/rand:
+Gói math/rand cung cấp chức năng liên quan đến bộ sinh số ngẫu nhiên (random number generator). 
+Để sử dụng gói này, bạn cần phải import nó bằng cách thêm dòng import "math/rand" vào đầu chương trình của bạn. 
+Gói này cung cấp các hàm như Intn, Float64, Perm, vv., để tạo các số ngẫu nhiên.
+
+Gói math:
+Gói math không cung cấp trực tiếp các chức năng liên quan đến số ngẫu nhiên, 
+nhưng nó chứa các hằng số và phép toán toán học phổ biến, giúp bạn xử lý các tính toán phức tạp hơn, 
+bao gồm tính toán liên quan đến số ngẫu nhiên nếu bạn muốn.
