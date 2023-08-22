@@ -47,3 +47,28 @@ go install
 
 #### 6. Chạy ứng dụng đơn giản của bạn
 <tên file>
+
+# Tạo workspace
+## Khởi tạo workspace
+Trong workspace directory, chạy lệnh:
+go work init ./hello
+
+## Chạy chương trình trong workspace directory
+go run example.com/hello
+Chương trình sẽ tạo ra một file chứa các module 
+
+### Các câu hỏi khác
+1. hiển thị thông tin API trên swagger
+
+- Cài đặt thư viện swaggo
+go get -u github.com/swaggo/swag/cmd/swag
+
+- Tạo tệp cấu hình swagger
+swag init
+
+- tích hợp Swagger vào ứng dụng Gin
+- cài đặt AI copilot cho việc nhắc lệnh code 
+- Kiểm tra đã cài đặt go trên vs code chưa thông qua các bước sau
+( cài đặt go giúp cho việc nhắc code được tốt hơn)
+* 1. Thực hiện sử dụng phím Ctrl + Shift + P
+* 2. Thực hiện cài đặt bằng câu lệnh go update
