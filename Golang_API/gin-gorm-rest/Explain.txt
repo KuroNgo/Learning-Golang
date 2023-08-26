@@ -1,1 +1,0 @@
-Trong Golang, các hàm có tham số có thể được truyền dưới dạng giá trị tham chiếu hoặc giá trị sao chép. Khi bạn truyền một hàm làm đối số cho một hà khác, bạn chỉ cần cung câp tên hàm nà không cần dấu ngoặc đơn `()`

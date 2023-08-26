@@ -1,0 +1,12 @@
+{
+  "NXc":
+  {
+    "client_id":"470615140012-l0qnhbjetuesf7asua5d3n5jlejh1o4s.apps.googleusercontent.com",
+    "project_id":"integral-loop-396908",
+    "Anc":"https://accounts.google.com/o/oauth2/auth",
+    "hVc":"https://oauth2.googleapis.com/token",
+    "znc":"https://www.googleapis.com/oauth2/v1/certs",
+    "s2a":"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",
+    "oNc":["http://localhost:8000/api/sessions/oauth/google"]
+  }
+}
